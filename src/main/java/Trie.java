@@ -6,25 +6,49 @@ public class Trie<T> {
 
     Node root;
 
-    void put(String key, T value) {
-        if (key == null || value == null) throw new RuntimeException("Key and value cannot be null");
-        else root = put(root, key, value);
+    void put(String value) {
+        if (value == null) throw new RuntimeException("Key and value cannot be null");
+        else root = put(root, value);
     }
 
-    Node put(Node rroot, String key, T value) {
+    Node put(Node rroot,  String  value) {
         if (rroot == null) rroot = new Node();
         char x;
-        for (int i = 0; i < key.length(); i++) {
+        for (int i = 0; i < value.length(); i++) {
             if (rroot.value == null) {
                 rroot.value = value;
                 return rroot;
             }
-            x = key.charAt(i);
-            rroot.childs[x] = put(rroot.childs[x], key, value);
+            x = value.charAt(i);
+            rroot.childs[x] = put(rroot.childs[x],  value);
             return rroot;
         }
         return rroot;
     }
+    void insert(String key) {
+        if (key == null) throw new RuntimeException("Key and value cannot be null");
+
+        if (root == null) root = new Node();
+        char x;
+        for (int i = 0; i < key.length(); i++) {
+            if (root.value == null) {
+                root.value = key;
+            }
+            else {
+            x = key.charAt(i);
+            root.childs[x] = put(root.childs[x],  key);
+            }
+
+        }
+
+    }
+
+
+
+
+
+
+
 
 
     String find(String key) {
@@ -33,11 +57,30 @@ public class Trie<T> {
         for (int i = 0; i < key.length(); i++) {
             char x = key.charAt(i);
             Node child = node.childs[x];
-            if (child != null)
+            if (child == null) return null;
+            else if (child != null)
                 node = child;
         }
         return (String) node.value;
 
+
+    }
+
+
+    public boolean add(String s) {
+        char first = s.charAt(0);
+        int index = first;
+        if (index < 0) {
+            System.out.println("uf");
+        }
+        Node child = root.childs[index];
+        if (child == null) {
+            child = new Node();
+            root.childs[index] = child;
+
+        }
+
+        return add(s.substring(1));
 
     }
 

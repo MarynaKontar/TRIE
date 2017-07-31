@@ -37,8 +37,8 @@ public class Node {
     @Override
     public String toString() {
         return "Node{" +
-                "childs=" + Arrays.toString(childs) +
-                ", value=" + value +
+                "childs=" + Arrays.toString(childs)+"\n" +
+                ", value=" + value+"\n" +
                 '}';
     }
 

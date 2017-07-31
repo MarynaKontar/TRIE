@@ -6,10 +6,12 @@ public class TestTrie {
 
         Trie<Integer> trie = new Trie<Integer>();
 
-        for (int i = 0; i<20; i++) {
+        for (int i = 6; i<20; i++) {
             String key = "df" + i;
-            trie.put(key, i);
+            trie.put(key);
         }
         System.out.println(trie.toString());
     }
 }
+
+
